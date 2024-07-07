@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        canJump = true;
+        canJump = false;
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
     }
@@ -27,13 +27,15 @@ public class PlayerMovement : MonoBehaviour
         transform.Rotate(0, x * Time.deltaTime * rotationSpeed, 0);
         transform.Translate(0, 0, y * Time.deltaTime * runSpeed);
 
-        animator.SetFloat("velX", x);
-        animator.SetFloat("velY", y);
+
     }
     void Update()
     {
         x = Input.GetAxis("Horizontal");
         y = Input.GetAxis("Vertical");
+
+        animator.SetFloat("velX", x);
+        animator.SetFloat("velY", y);
 
         if (canJump)
         {
@@ -41,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Jump();
             }
+            animator.SetBool("tocoSuelo", true);
         }
         else
         {
@@ -52,13 +55,12 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         animator.SetBool("salte", true);
-        animator.SetBool("tocoSuelo", true);
     }
 
     void Cayendo()
     {
-        Debug.Log("CAYE");
         animator.SetBool("tocoSuelo", false);
+        animator.SetBool("salte", false);
     }
 
 

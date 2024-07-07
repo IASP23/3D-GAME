@@ -6,15 +6,6 @@ using UnityEngine;
 public class FootLogic : MonoBehaviour
 {
     public PlayerMovement playerMovement;
-    void Start()
-    {
-
-    }
-    void Update()
-    {
-
-    }
-
     private void OnTriggerStay(Collider other)
     {
         playerMovement.canJump = true;
